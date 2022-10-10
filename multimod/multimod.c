@@ -1,6 +1,7 @@
 #include <stdint.h>
+#include <stdio.h>
 
-static i =0;
+static int i =0;
 static int arr[100];
 //mod operation
 uint64_t mod(uint64_t x,uint64_t m)
