@@ -14,7 +14,7 @@ uint64_t modd(uint64_t x,uint64_t m)
 
 uint64_t mod(uint64_t dividend, uint64_t divisor) 
 {
-    int64_t divdlen = 31, divslen = 31;
+    int64_t divdlen = 100, divslen = 100;
     int64_t divsshift;
     
     if(dividend == 0 || divisor == 0) {
