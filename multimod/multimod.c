@@ -53,7 +53,7 @@ uint64_t mod(uint64_t x,uint64_t m)
   
   else
   {
-    res = modd(a,m);
+    res = modd(x,m);
     return res;
   }
 }
