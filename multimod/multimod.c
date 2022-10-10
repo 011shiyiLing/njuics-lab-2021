@@ -1,8 +1,7 @@
 #include <stdint.h>
 
+static i =0;
 static int arr[100];
-static int i=0;
-
 //mod operation
 uint64_t mod(uint64_t x,uint64_t m)
 {
@@ -21,6 +20,11 @@ void turn_bianry(uint64_t a)
     a = a>>1;
     arr[i] = temp;
     i++;
+  }
+  
+  for (int j=i-1;j>=0;j--)
+  {
+   printf("%u\n",arr[j]);
   }
   return;
 }
