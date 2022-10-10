@@ -20,7 +20,7 @@ uint64_t multiply(uint64_t a,uint64_t b)
 }
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
-  uint64_t x;
+  uint64_t x=0;
   x = multiply(a,b); 
   uint64_t res = 0;
   res = mod(x,m);  
