@@ -7,7 +7,7 @@ static uint64_t arr[100];
 uint64_t mod(uint64_t x,uint64_t m)
 {
   uint32_t res=0;
-  res = x & (m-1);//要求m必须是2的正整数幂次
+  res = x % m;//要求m必须是2的正整数幂次
   return res;
 }
 
