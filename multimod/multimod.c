@@ -45,7 +45,7 @@ uint64_t modd(uint64_t dividend, uint64_t divisor)
 uint64_t mod(uint64_t x,uint64_t m)
 {
   uint64_t res=0;
-  if((m&1) == 0)//要求m必须是2的正整数幂次
+  if((m&(m-1)) == 0)//要求m必须是2的正整数幂次
   {
     res = x & (m-1);
     return res;
