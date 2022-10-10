@@ -2,6 +2,8 @@
 #include <stdio.h>
 
 static int i;
+static uint64_t arr[100];
+
 //mod operation
 uint64_t mod(uint64_t x,uint64_t m)
 {
@@ -27,7 +29,7 @@ void turn_binary(uint64_t a)
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
-  int arr[100];
+  uint64_t arr[100];
   uint64_t x=0;
   turn_binary(a);
   for(int j=i-1;j>=0;j--)
