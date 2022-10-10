@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <inttypes.h>
 
-uint64_t multimod(uint64_t, uint64_t, uint64_t);
+uint32_t multimod(uint32_t, uint32_t, uint32_t);
 
-void test(uint64_t a, uint64_t b, uint64_t m) {
+void test(uint32_t a, uint32_t b, uint32_t m) {
   #define U64 "%" PRIu64
   printf(U64 " * " U64 " mod " U64 " = " U64 "\n", a, b, m, multimod(a, b, m));
 }

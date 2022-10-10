@@ -1,17 +1,17 @@
 #include <stdint.h>
 
 //mod operation
-uint64_t mod(uint64_t x,uint64_t m)
+uint32_t mod(uint64_t x,uint64_t m)
 {
-  uint64_t res;
+  uint32_t res;
   res = x & (m-1);
   return res;
 }
 
 //multiply operation
-uint64_t multiply(uint64_t a,uint64_t b)
+uint32_t multiply(uint32_t a,uint32_t b)
 {
-  uint64_t res =0;
+  uint32_t res =0;
   for(int i=b;i>0;i--)
   {
     res += a;
@@ -19,10 +19,10 @@ uint64_t multiply(uint64_t a,uint64_t b)
   return res;
 }
 
-uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) {
-  uint64_t x;
+uint32_t multimod(uint32_t a, uint32_t b, uint32_t m) {
+  uint32_t x;
   x = multiply(a,b); 
-  uint64_t res = 0;
+  uint32_t res = 0;
   res = mod(x,m);  
   return res; 
 }
