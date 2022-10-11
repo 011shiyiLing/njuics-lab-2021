@@ -3,16 +3,36 @@
 static int i;
 static uint64_t arr[100];
 
-
-
+uint64_t modd(uint64_t x,uint64_t m)
+{
+  if (m > x) return x;
+  else if(m == x) return 0;
+  else
+  {
+   uint64_t res = x;
+   while(res >= m)
+   {
+     res -= m;
+   } 
+   return res;
+  }
+}
 
 //mod operation
 uint64_t mod(uint64_t x,uint64_t m)
 {
   uint64_t res=0;
-  //要求m必须是2的正整数幂次
-  res = x & (m-1);
-  return res;
+  if(m&(m-1) == 0)//要求m必须是2的正整数幂次
+  {
+    res = x & (m-1);
+    return res;
+  }
+  
+  else
+  {
+    res = modd(a,m);
+    return res;
+  }
 }
 
 //把a转换成二进制字符数组
