@@ -3,59 +3,16 @@
 static int i;
 static uint64_t arr[100];
 
-uint64_t modd(uint64_t dividend, uint64_t divisor) 
-{
-    uint64_t divdlen = 31, divslen = 31;
-    uint64_t divsshift;
-    
-    if(dividend == 0 || divisor == 0) {
-        return 0;
-    }
 
-    while((divdlen >= 0) && !((dividend >> divdlen) & 0x1)) 
-    {
-        divdlen--;
-    }
-    divdlen += 1;
-
-    while((divslen >= 0) && !((divisor >> divslen) & 0x1)) {
-        divslen--;
-    }
-    divslen += 1;
-    
-    divsshift = ((divisor << (divdlen - divslen)) > dividend) ? (divdlen - divslen - 1) : (divdlen - divslen);
-   
-    while (dividend >= (divisor << divsshift))
-    {
-        dividend -= (divisor << divsshift);
-
-        while(dividend < (divisor << divsshift)) 
-        {
-            divsshift--;
-            if(divsshift < 0) return dividend;
-        }
-        if(divsshift < 0) return dividend;
-    }
-    
-    return dividend;
-}
 
 
 //mod operation
 uint64_t mod(uint64_t x,uint64_t m)
 {
   uint64_t res=0;
-  if((m&(m-1)) == 0)//要求m必须是2的正整数幂次
-  {
-    res = x & (m-1);
-    return res;
-  }
-  
-  else
-  {
-    res = modd(x,m);
-    return res;
-  }
+  //要求m必须是2的正整数幂次
+  res = x & (m-1);
+  return res;
 }
 
 //把a转换成二进制字符数组
@@ -82,7 +39,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   {
     if(arr[j] == 1)
     {
-      x += b<<j;
+      x += mod(b<<j,m);
     }
   }
   uint64_t res = 0;
