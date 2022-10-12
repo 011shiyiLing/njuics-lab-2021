@@ -11,7 +11,7 @@ uint64_t modd(uint64_t a,uint64_t b)
   {
     while(c < a)
     {
-      c = c << 4;
+      c = c << 2;
       if (c > a)
       {
         c = c>>2;
