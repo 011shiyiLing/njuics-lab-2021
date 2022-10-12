@@ -31,7 +31,9 @@ uint64_t mod(uint64_t x,uint64_t m)
   else
   {
     res = modd(x,m);
+    return res;
   }
+  
 }
 
 //把a转换成二进制字符数组
