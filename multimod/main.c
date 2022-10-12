@@ -12,7 +12,7 @@ void test(uint64_t a, uint64_t b, uint64_t m) {
 int main() {
   test(15,3,4);
   test(465, 365, 16);
-  test(25,4,3)
+  test(25,4,3);
   test(17,3,13);
   //test(123, 456, -1ULL);
   //test(-2ULL, -2ULL, -1ULL); // should be 1
