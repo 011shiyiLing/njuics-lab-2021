@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdio.h>
 
 static int i;
 static uint64_t arr[100];
@@ -59,9 +60,10 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   {
     if(arr[j] == 1)
     {
-      x += b<<j;
+      x += mod(b<<j,m);
     }
   }
+  printf("%u\n",x);
   uint64_t res = 0;
   res = mod(x,m);
   return res; 
