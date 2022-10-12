@@ -6,13 +6,13 @@ static uint64_t arr[100];
 uint64_t modd(uint64_t a,uint64_t b)
 {
   int k = 31;
-  uint64_t res = 0;
+  //uint64_t res = 0;
   for(;k>=0;k--)
   {
     if((a >> k) >= b)
     {
       a = a & ((1 << k)-1);//取余数继续
-      res += (1 << k);
+      //res += (1 << k);
     }
   }
   return a;//返回最后的余数
@@ -59,7 +59,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   {
     if(arr[j] == 1)
     {
-      x += mod(b<<j,m);
+      x += b<<j;
     }
   }
   uint64_t res = 0;
