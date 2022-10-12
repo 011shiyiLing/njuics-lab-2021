@@ -63,7 +63,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
       x += mod(b<<j,m);
     }
   }
-  printf("%llu\n",x);
+  printf("%lu\n",x);
   uint64_t res = 0;
   res = mod(x,m);
   return res; 
