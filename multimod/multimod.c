@@ -6,19 +6,22 @@ static uint64_t arr[100];
 
 uint64_t modd(uint64_t a,uint64_t b)
 {
-  int k;
-  //uint64_t res = 0;
-  uint64_t r = 0;
-  for(k=31;k>=0;k--)
+  uint64_t c = b;
+  while(a >= b)
   {
-    if((a >> k) >= b)
+    while(c < a)
     {
-      r = a;
-      a = a & ((1 << k)-1);//取余数继续
-      //res += (1 << k);
+      c = c << 2;
+      if (c > a)
+      {
+        c = c>>2;
+        break;
+      }
     }
+    a = a-c;
+    c = b;
   }
-  return r;//返回最后的余数
+  return a;
 }
 
 //mod operation
