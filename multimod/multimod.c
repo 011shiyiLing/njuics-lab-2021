@@ -1,9 +1,7 @@
 #include <stdint.h>
 
 static int i;
-static int p;
 static uint64_t arr[100];
-static uint64_t l2[100];
 
 uint64_t modd(uint64_t a,uint64_t b)
 {
@@ -47,21 +45,6 @@ void turn_binary(uint64_t arr[],uint64_t a,int i)
     arr[i] = temp;
     i++;
   }
-}
-
-uint64_t multiply(uint64_t a,uint64_t b)
-{
-  p = 0;
-  turn_bianry(l2,a,p);
-  uint64_t res = 0;
-  for(int j=p-1;j>=0;j--)
-  {
-    if(l2[j] == 1)
-    {
-      res += b<<j;
-    }
-  }
-  return res;
 }
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
