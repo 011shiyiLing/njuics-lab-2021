@@ -8,7 +8,7 @@ uint64_t modd(uint64_t a,uint64_t b)
 {
   int k;
   //uint64_t res = 0;
-  uint64_t r = 0
+  uint64_t r = 0;
   for(k=31;k>=0;k--)
   {
     if((a >> k) >= b)
