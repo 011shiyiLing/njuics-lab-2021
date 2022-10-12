@@ -48,11 +48,7 @@ void turn_binary(uint64_t a)
     arr[i] = temp;
     i++;
   }
-  
-  for(int j=i-1;i>=0;i--)
-  {
-    printf("%d\n",arr[j]);
-  }
+
 }
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
