@@ -23,17 +23,17 @@ uint64_t modd(uint64_t a,uint64_t b)
 uint64_t mod(uint64_t x,uint64_t m)
 {
   uint64_t res=0;
-  if((m & (m-1)) == 0)//要求m必须是2的正整数幂次
-  {
-    res = x & (m-1);
-    return res;
-  }
+  //if((m & (m-1)) == 0)//要求m必须是2的正整数幂次
+  //{
+  res = x & (m-1);
+  return res;
+  //}
   
-  else
-  {
-    res = modd(x,m);
-    return res;
-  }
+  //else
+  //{
+    //res = modd(x,m);
+    //return res;
+  //}
   
 }
 
@@ -63,7 +63,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
       x += mod(b<<j,m);
     }
   }
-  printf("%lu\n",x);
+  
   uint64_t res = 0;
   res = mod(x,m);
   return res; 
