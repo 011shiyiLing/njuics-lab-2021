@@ -48,7 +48,7 @@ void turn_binary(uint64_t a)
   uint64_t temp;
   while(a != 0)
   {
-    temp = mod(a,2);
+    temp = a & 1;
     a = a>>1;
     arr[i] = temp;
     i++;
