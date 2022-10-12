@@ -1,21 +1,23 @@
 #include <stdint.h>
 
 static int i;
+static int p;
 static uint64_t arr[100];
+static uint64_t l2[100];
 
-uint64_t modd(uint64_t x,uint64_t m)
+uint64_t modd(uint64_t a,uint64_t b)
 {
-  if (m > x) return x;
-  else if(m == x) return 0;
-  else
+  int k = 31;
+  uint64_t res = 0;
+  for(;k>=0;k--)
   {
-   uint64_t res = x;
-   while(res >= m)
-   {
-     res -= m;
-   } 
-   return res;
+    if((a >> k) >= b)
+    {
+      a = a & ((1 << k)-1);//取余数继续
+      res += (1 << k);
+    }
   }
+  return a;//返回最后的余数
 }
 
 //mod operation
@@ -31,14 +33,12 @@ uint64_t mod(uint64_t x,uint64_t m)
   else
   {
     res = modd(x,m);
-    return res;
   }
 }
 
 //把a转换成二进制字符数组
-void turn_binary(uint64_t a)
+void turn_binary(uint64_t arr[],uint64_t a,int i)
 {
-  i = 0;
   uint64_t temp;
   while(a != 0)
   {
@@ -47,14 +47,29 @@ void turn_binary(uint64_t a)
     arr[i] = temp;
     i++;
   }
-  
+}
+
+uint64_t multiply(uint64_t a,uint64_t b)
+{
+  p = 0;
+  turn_bianry(l2,a,p);
+  uint64_t res = 0;
+  for(int j=p-1;j>=0;j--)
+  {
+    if(l2[j] == 1)
+    {
+      res += b<<j;
+    }
+  }
+  return res;
 }
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
   //uint64_t arr[100];
   uint64_t x=0;
-  turn_binary(a);
+  i =0;
+  turn_binary(arr,a,i);
   for(int j=i-1;j>=0;j--)
   {
     if(arr[j] == 1)
