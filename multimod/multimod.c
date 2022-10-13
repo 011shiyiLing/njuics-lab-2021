@@ -15,7 +15,7 @@ uint64_t modd(uint64_t a,uint64_t b)
 
       if(c<=b)
       {
-        printf("%d\n",1);
+        printf("%llu\n",c);
         while(a >= b)
         {
           a = a-b;
