@@ -6,9 +6,9 @@ uint64_t modd(uint64_t a,uint64_t b)
   if (b > a) return a;
   else if (b==a) return 0;
 
-  else if((b << 2) == 0)
+  else if((b << 4) <= b)
   {
-    printf("%d\n",1);
+    //printf("%d\n",1);
     while(a >= b)
     {
       a = a-b;
