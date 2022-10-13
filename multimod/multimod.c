@@ -9,7 +9,17 @@ uint64_t modd(uint64_t a,uint64_t b)
   {
     while(c < a)
     {
+      if (b > (-1ULL >> 4))//out of bound
+      {
+        while(a >= b)
+        {
+          a = a-b;
+        }
+        return a;
+      }
+
       c = c << 4;
+
       if (c > a)
       {
         c = c>>4;
