@@ -5,7 +5,8 @@ uint64_t modd(uint64_t a,uint64_t b)
 {
   if (b > a) return a;
   else if (b==a) return 0;
-  else if(b > ((1ULL)>>4))
+
+  else if(b > ((-1ULL)>>4))
   {
     printf("%d\n",1);
     while(a >= b)
