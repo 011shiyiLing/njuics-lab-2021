@@ -5,7 +5,7 @@ uint64_t modd(uint64_t a,uint64_t b)
 {
   if (b > a) return a;
   else if (b==a) return 0;
-  else if (b > (((1<32)-1)>>4))//b out of bound
+  else if (b > (1<<32))//b out of bound
   {
     printf("%d\n",1);
     while(a >= b)
