@@ -6,7 +6,7 @@ uint64_t modd(uint64_t a,uint64_t b)
   if (b > a) return a;
   else if (b==a) return 0;
 
-  else if(b >= -2ULL)
+  else if(b >= (18446744073709551614>>4))
   {
     printf("%d\n",1);
     while(a >= b)
