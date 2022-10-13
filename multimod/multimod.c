@@ -11,10 +11,10 @@ uint64_t modd(uint64_t a,uint64_t b)
   {
     while(c < a)
     {
-      c = c << 2;
+      c = c << 4;
       if (c > a)
       {
-        c = c>>2;
+        c = c>>4;
         break;
       }
     }
@@ -65,7 +65,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   {
     if(arr[j] == 1)
     {
-      x += b<<j;
+      x += mod(b<<j,m);
     }
   }
   
