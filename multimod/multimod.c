@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdio.h>
 
 uint64_t modd(uint64_t a,uint64_t b)
 {
@@ -6,13 +7,14 @@ uint64_t modd(uint64_t a,uint64_t b)
   else if (b==a) return 0;
   else if (b > ((-1ULL)>>4))//b out of bound
   {
+    printf("%d\n",1);
     while(a >= b)
     {
       a = a-b;
     }
     return a;
   }
-
+  printf("%d\n",0);
   uint64_t c = b;
   while(a >= b)
   {
