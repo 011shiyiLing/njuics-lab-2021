@@ -4,20 +4,20 @@ uint64_t modd(uint64_t a,uint64_t b)
 {
   if (b > a) return a;
   else if (b==a) return 0;
+  else if (b > ((-1ULL)>>4))//b out of bound
+  {
+    while(a >= b)
+    {
+      a = a-b;
+    }
+    return a;
+  }
+
   uint64_t c = b;
   while(a >= b)
   {
     while(c < a)
     {
-      if (b > ((-1ULL)>>4))//out of bound
-      {
-        while(a >= b)
-        {
-          a = a-b;
-        }
-        return a;
-      }
-
       c = c << 4;
 
       if (c > a)
