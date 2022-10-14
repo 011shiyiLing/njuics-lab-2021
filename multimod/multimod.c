@@ -84,7 +84,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   uint64_t x=0;
   i =0;
   turn_binary(a);
-  for(int j=0;j<i;j++)
+  for(int j=1;j<i;j++)
   {
     if (arr[j] == 0) continue;
     else
