@@ -1,7 +1,5 @@
 #include <stdint.h>
 
-static uint64_t arr[64];
-static uint64_t i=0;
 //2^64-1
 static uint64_t maxmum = -1;
 //2^63
@@ -14,11 +12,11 @@ uint64_t modd(uint64_t a,uint64_t m)
  {
   while(c < smaxmum && c < a)
   {
-    c = c << 2;
+    c = c << 1;
   }
   while(c > a && c > m)
   {
-    c = c >> 2;
+    c = c >> 1;
   }
   a = a - c;
  }  
@@ -41,18 +39,6 @@ uint64_t mod(uint64_t x,uint64_t m)
     return res;
   }
   
-}
-
-void turn_binary(uint64_t t)
-{
-  uint64_t a = t;
-  while(a != 0)
-  {
-    uint64_t temp = a&1;
-    arr[i] = temp;
-    a = a >> 1;
-    i++;
-  }
 }
 
 //attention:'a+b''s value is out of bound
