@@ -48,20 +48,20 @@ uint64_t mod(uint64_t x,uint64_t m)
 uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
 {
   uint64_t sum = 0;
-  a = modd(a,m);
-  b = modd(b,m);
+  a = mod(a,m);
+  b = mod(b,m);
 
   sum = a+b;
 
   while(a != 0 && b!= 0  && b-1 >= maxmum - a)
   {
-    a = modd(sum,m);
-    b = modd(maxmum,m) + modd(1,m);
+    a = mod(sum,m);
+    b = mod(maxmum,m) + mod(1,m);
     sum = a+b;
   }
 
   uint32_t res = 0;
-  res = modd(sum,m);
+  res = mod(sum,m);
   return res;
 }
 
