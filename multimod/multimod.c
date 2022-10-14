@@ -1,7 +1,7 @@
 #include <stdint.h>
 
-static int i;
-static uint64_t arr[1000];
+static uint64_t arr[64];
+static int i=0;
 //2^64-1
 static uint64_t maxmum = -1;
 //2^63
@@ -82,18 +82,16 @@ void turn_binary(uint64_t a)
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
   uint64_t x=0;
-  i =0;
-  turn_binary(a);
-  for(int j=1;j<i;j++)
+  for(int j=1;j<64;j++)
   {
-    if (arr[j] == 0) continue;
+    if (((a>>j)&1) == 0) continue;
     else
     {
       int k =0;
       uint64_t b1 = b;
       for(;k<j;k++)
       {
-        b1 = plusmod(b1,b1,m);
+        b1 = mod((b1 << 1),m);
       }
 
       x = plusmod(x,b1,m);
