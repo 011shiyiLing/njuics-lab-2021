@@ -43,7 +43,7 @@ uint64_t mod(uint64_t x,uint64_t m)
   
 }
 
-//attention:'a+b' is out of bound
+//attention:'a+b''s value is out of bound
 //(a+b) mod m = (a mod m + b mod m)mod m
 uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
 {
@@ -81,18 +81,28 @@ void turn_binary(uint64_t a)
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
-  //uint64_t x=0;
-  //i =0;
-  //turn_binary(a);
-  //for(int j=i-1;j>=0;j--)
-  //{
-    //if(arr[j] == 1)
-    //{
-      //x += b<<j;
-    //}
-    //}
+  uint64_t x=0;
+  i =0;
+  turn_binary(a);
+  for(int j=0;j<i;j++)
+  {
+    if (arr[j] == 0) continue;
+    else
+    {
+      int k =0;
+      uint64_t b1 = b;
+      for(;k<j;k++)
+      {
+        b1 = plusmod(b1,b1,m);
+      }
+
+      x = plusmod(x,b1,m);
+    }
+  }
   
-  uint64_t res = 0;
-  res = plusmod(a,b,m);
-  return res; 
+  if((a&1 == 1))
+  {
+    x = plusmod(x,b,m);
+  }
+  return x;
 }
