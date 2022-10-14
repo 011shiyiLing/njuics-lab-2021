@@ -1,11 +1,15 @@
 #include <stdint.h>
 
-static uint64_t arr[64];
-static int i=0;
+
 //2^64-1
 static uint64_t maxmum = -1;
 //2^63
 static uint64_t smaxmum = (uint64_t) 1<<63;
+
+uint64_t bitof(uint64_t a,uint64_t i)
+{
+  return ((a>>i)&1);
+}
 
 uint64_t modd(uint64_t a,uint64_t m)
 {
@@ -66,26 +70,13 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
 }
 
 
-//把a转换成二进制字符数组
-void turn_binary(uint64_t a)
-{
-  uint64_t temp;
-  while(a != 0)
-  {
-    temp = a & 1;
-    a = a>>1;
-    arr[i] = temp;
-    i++;
-  }
-}
-
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
   uint64_t x=0;
-  turn_binary(a);
-  for(int j=1;j<64;j++)
+  uint64_t j = 1;
+  for(;j<64;j++)
   {
-    if (((a>>j)&1) == 0) continue;
+    if (bitof(a,j) == 0) continue;
     else
     {
       int k =0;
@@ -99,7 +90,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
     }
   }
   
-  if((a&1) == 1)
+  if(bitof(a,0) == 1)
   {
     x = plusmod(x,b,m);
   }
