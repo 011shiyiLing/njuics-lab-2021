@@ -6,7 +6,7 @@ static uint64_t maxmum = -1;
 //2^63
 static uint64_t smaxmum = (uint64_t) 1<<63;
 
-uint64_t moddd(uint64_t a,uint64_t m)
+uint64_t modd(uint64_t a,uint64_t m)
 {
   uint64_t c = m;
   while(a >= m)
@@ -30,14 +30,14 @@ uint64_t mod(uint64_t x,uint64_t m)
   uint64_t res=0;
   if((m & (m-1)) == 0)//要求m必须是2的正整数幂次
   {
-    //res = x & (m-1);
-    res = moddd(x,m);
+    res = x & (m-1);
+    //res = modd(x,m);
     return res;
   }
   
   else
   {
-    res = moddd(x,m);
+    res = modd(x,m);
     return res;
   }
   
