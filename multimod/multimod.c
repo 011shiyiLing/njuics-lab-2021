@@ -81,7 +81,7 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
   uint64_t res=0;
-  turn_binary(a);
+  //turn_binary(a);
   uint64_t j = 1;
   for(;j<64;j++)
   {
