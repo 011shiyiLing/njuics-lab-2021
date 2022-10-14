@@ -2,39 +2,27 @@
 
 static int i;
 static uint64_t arr[1000];
+//2^64-1
+static uint64_t maxmum = -1;
+//2^63
+static uint64_t smaxmum = (uint64_t) 1<<63;
 
-
-uint64_t modd(uint64_t a,uint64_t b)
+uint64_t modd(uint64_t a,uint64_t m)
 {
-  if (b > a) return a;
-  else if (b==a) return 0;
-
-  else if((b << 4) <= b)//out of bound
+ uint64_t m1 = m;
+ while(a >= m)
+ {
+  while(m1 < smaxmum && m1 < a)
   {
-    //printf("%d\n",1);
-    while(a >= b)
-    {
-      a = a-b;
-    }
-    return a;
+    m1 = m1 << 1;
   }
-  
-  uint64_t c = b;
-  while(a >= b)
+  while(m1 > a && m1 > m)
   {
-    while(c < a)
-    {
-      c = c << 4;
-      if (c > a)
-      {
-        c = c>>4;
-        break;
-      }
-    }
-    a = a-c;
-    c = b;
+    m1 = m1 >> 1;
   }
-  return a;
+  a -= m1;
+ }  
+ return a;
 }
 
 //mod operation
@@ -54,6 +42,7 @@ uint64_t mod(uint64_t x,uint64_t m)
   }
   
 }
+
 
 //把a转换成二进制字符数组
 void turn_binary(uint64_t a)
