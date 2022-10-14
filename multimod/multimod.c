@@ -100,7 +100,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
     }
   }
   
-  if((a&1 == 1))
+  if(((a&1) == 1))
   {
     x = plusmod(x,b,m);
   }
