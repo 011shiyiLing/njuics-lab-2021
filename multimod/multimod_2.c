@@ -47,13 +47,13 @@ uint64_t mod(uint64_t x,uint64_t m)
   if((m & (m-1)) == 0)//要求m必须是2的正整数幂次
   {
     //res = x & (m-1);
-    res = modd(x,m);
+    res = moddd(x,m);
     return res;
   }
   
   else
   {
-    res = modd(x,m);
+    res = moddd(x,m);
     return res;
   }
   
