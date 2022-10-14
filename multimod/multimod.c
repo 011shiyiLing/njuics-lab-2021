@@ -48,20 +48,20 @@ uint64_t mod(uint64_t x,uint64_t m)
 uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
 {
   uint64_t sum = 0;
-  a = mod(a,m);
-  b = mod(b,m);
+  a = modd(a,m);
+  b = modd(b,m);
 
   sum = a+b;
 
   while(a != 0 && b!= 0  && b-1 >= maxmum - a)
   {
-    a = mod(sum,m);
-    b = mod(maxmum,m) + mod(1,m);
+    a = modd(sum,m);
+    b = modd(maxmum,m) + modd(1,m);
     sum = a+b;
   }
 
   uint32_t res = 0;
-  res = mod(sum,m);
+  res = modd(sum,m);
   return res;
 }
 
@@ -82,6 +82,7 @@ void turn_binary(uint64_t a)
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
   uint64_t x=0;
+  turn_binary(a);
   for(int j=1;j<64;j++)
   {
     if (((a>>j)&1) == 0) continue;
@@ -98,7 +99,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
     }
   }
   
-  if(((a>>0)&1) == 1)
+  if((a&1) == 1)
   {
     x = plusmod(x,b,m);
   }
