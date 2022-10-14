@@ -84,3 +84,30 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   }
   return res;
 }
+
+uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
+{
+  uint64_t x=0;
+  uint64_t j = 1;
+  for(;j<64;j++)
+  {
+    if (bitof(a,j) == 0) continue;
+    else
+    {
+      int k =0;
+      uint64_t b1 = b;
+      for(;k<j;k++)
+      {
+        b1 = plusmod(b1,b1,m);
+      }
+
+      x = plusmod(x,b1,m);
+    }
+  }
+  
+  if(bitof(a,0) == 1)
+  {
+    x = plusmod(x,b,m);
+  }
+  return x;
+}

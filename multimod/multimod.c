@@ -7,11 +7,6 @@ static uint64_t maxmum = -1;
 //2^63
 static uint64_t smaxmum = (uint64_t) 1<<63;
 
-uint64_t bitof(uint64_t a,uint64_t i)
-{
-  return ((a>>i)&1);
-}
-
 uint64_t modd(uint64_t a,uint64_t m)
 {
  uint64_t m1 = m;
@@ -19,11 +14,11 @@ uint64_t modd(uint64_t a,uint64_t m)
  {
   while(m1 < smaxmum && m1 < a)
   {
-    m1 = m1 << 1;
+    m1 = m1 << 2;
   }
   while(m1 > a && m1 > m)
   {
-    m1 = m1 >> 1;
+    m1 = m1 >> 2;
   }
   a -= m1;
  }  
@@ -90,7 +85,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   uint64_t j = 1;
   for(;j<64;j++)
   {
-    if (bitof(a,j) == 0) continue;
+    if (((a>>j)&1) == 0) continue;
     else
     {
       int k =0;
@@ -104,7 +99,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
     }
   }
   
-  if(bitof(a,0) == 1)
+  if((a&1) == 1)
   {
     x = plusmod(x,b,m);
   }
