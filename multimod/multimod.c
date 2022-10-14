@@ -91,7 +91,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
       uint64_t b1 = b;
       for(;k<j;k++)
       {
-        b1 = mod((b1 << 1),m);
+        b1 = plusmod(b1,b1,m);
       }
 
       x = plusmod(x,b1,m);
