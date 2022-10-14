@@ -11,7 +11,7 @@ uint64_t bitof(uint64_t a,uint64_t i)
   return ((a>>i)&1);
 }
 
-uint64_t modd(uint64_t a,uint64_t m)
+uint64_t mod(uint64_t a,uint64_t m)
 {
  uint64_t m1 = m;
  while(a >= m)
@@ -27,24 +27,6 @@ uint64_t modd(uint64_t a,uint64_t m)
   a -= m1;
  }  
  return a;
-}
-
-//mod operation
-uint64_t mod(uint64_t x,uint64_t m)
-{
-  uint64_t res=0;
-  if((m & (m-1)) == 0)//要求m必须是2的正整数幂次
-  {
-    res = x & (m-1);
-    return res;
-  }
-  
-  else
-  {
-    res = modd(x,m);
-    return res;
-  }
-  
 }
 
 //attention:'a+b''s value is out of bound
@@ -64,7 +46,7 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
     sum = a+b;
   }
 
-  uint32_t res = 0;
+  uint64_t res = 0;
   res = mod(sum,m);
   return res;
 }
