@@ -1,7 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-uint64_t modd(uint64_t a,uint64_t b)
+uint64_t moddd(uint64_t a,uint64_t b)
 {
   if (b > a) return a;
   else if (b==a) return 0;
