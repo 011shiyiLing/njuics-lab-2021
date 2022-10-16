@@ -64,7 +64,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
  
  for(int i=1;i<64;i++)
  {
-  if(((a>>i)&1) == 1)
+  if(((a>>i)&1) != 0)
   {
     uint64_t b1 = b;
     for(int j=0;j<i;j++)
