@@ -29,8 +29,7 @@ uint64_t mod(uint64_t x,uint64_t m)
   uint64_t res=0;
   if((m & (m-1)) == 0)//要求m必须是2的正整数幂次
   {
-    //res = x & (m-1);
-    res = modd(x,m);
+    res = x & (m-1);
     return res;
   }
   
@@ -49,7 +48,7 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
   sum = a+b;
   
   //"a+b" out of bound
-  while(a!=0 && b!=0 && a -1 >maxmum-b )
+  while(a!=0 && b!=0 && (a-1) >= maxmum-b)
   {
     a = mod(sum,m);
     b = mod(maxmum,m) + mod(1,m);
