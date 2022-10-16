@@ -1,5 +1,4 @@
 #include <stdint.h>
-//#include <stdio.h>
 
 //2^64-1
 static uint64_t maxmum = -1;
@@ -44,27 +43,14 @@ uint64_t mod(uint64_t x,uint64_t m)
 
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
-  uint64_t exp = mod(a,m);
   uint64_t res = 0;
+ 
+ for(int i=0;i<64;i++)
+ {
+  if(((a>>i)&1) == 0) continue;
 
-  while(b)
-  {
-    if(b&1)//judge b's lasted position == 1
-    {
-      res = res + exp;
-      if(res >= m)
-      {
-        res = res - m;
-      }
-    }
-    
-    exp = exp << 1;
-    if(exp > m)
-    {
-      exp = exp -m;
-    }
-    b >>= 1;
-  }
-  return res;
+  res += (b << i);
+ } 
+ return mod(res,m);
 }
 
