@@ -56,6 +56,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
       {
         res = res - m;
       }
+    }
     
     exp = exp << 1;
     if(exp > m)
