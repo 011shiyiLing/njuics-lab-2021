@@ -12,11 +12,11 @@ uint64_t modd(uint64_t a,uint64_t m)
   {
     while(c < smaxmum && c < a)
     {
-      c = c << 1;
+      c = c << 2;
     }
     while(c > a && c > m)
     {
-      c = c >> 1;
+      c = c >> 2;
     }
     a = a - c;
   }  
