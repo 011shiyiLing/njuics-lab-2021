@@ -3,7 +3,7 @@
 //2^64-1
 static uint64_t maxmum = -1;
 //2^63
-static uint64_t smaxmum = (uint64_t) 2<<63;
+static uint64_t smaxmum = (uint64_t) 4<<63;
 
 uint64_t modd(uint64_t a,uint64_t m)
 {
@@ -12,11 +12,11 @@ uint64_t modd(uint64_t a,uint64_t m)
   {
     while(c < smaxmum && c < a)
     {
-      c = c << 2;
+      c = c << 4;
     }
     while(c > a && c > m)
     {
-      c = c >> 2;
+      c = c >> 4;
     }
     a = a - c;
   }  
