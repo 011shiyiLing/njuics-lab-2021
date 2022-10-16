@@ -68,6 +68,6 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
   b = b<<i;
   res = plusmod(res,b,m);
  } 
- return mod(res,m);
+ //return mod(res,m);
 }
 
