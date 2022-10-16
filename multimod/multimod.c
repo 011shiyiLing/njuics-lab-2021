@@ -3,7 +3,7 @@
 //2^64-1
 static uint64_t maxmum = -1;
 //2^63
-static uint64_t smaxmum = (uint64_t) 1<<63;
+static uint64_t smaxmum = (uint64_t) 2<<63;
 
 uint64_t modd(uint64_t a,uint64_t m)
 {
@@ -12,11 +12,11 @@ uint64_t modd(uint64_t a,uint64_t m)
   {
     while(c < smaxmum && c < a)
     {
-      c = c << 1;
+      c = c << 2;
     }
     while(c > a && c > m)
     {
-      c = c >> 1;
+      c = c >> 2;
     }
     a = a - c;
   }  
@@ -48,11 +48,9 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
   sum = a+b;
   
   //"a+b" out of bound
-  if(a!=0 && b!=0 && (a-1) >= (maxmum-b))
+  if((a-1) >= (maxmum-b))
   {
-    a = mod(sum,m);
-    b = mod(maxmum,m) + mod(1,m);
-    sum = a+b;
+    sum =  mod(sum,m) + mod(maxmum,m) + mod(1,m);
   }
 
   return mod(sum,m);
@@ -72,10 +70,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
       }
       res = plusmod(res,b1,m);
     }
-    
   } 
-
-  //if((a&1) == 1) res = plusmod(res,b,m);
   return res;
 }
 
