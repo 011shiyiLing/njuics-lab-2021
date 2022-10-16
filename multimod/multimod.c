@@ -48,7 +48,7 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
   sum = a+b;
   
   //"a+b" out of bound
-  if(a!=0 && b!=0 && (a-1) >= maxmum-b)
+  if(a!=0 && b!=0 && (a-1) >= (maxmum-b))
   {
     a = mod(sum,m);
     b = mod(maxmum,m) + mod(1,m);
@@ -61,15 +61,12 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
   uint64_t res = 0;
-  int i=1;
-  for(;i<64;i++)
+  for(int i=1;i<64;i++)
   {
-    if(((a>>i)&1) == 0) continue;
-    else
+    if(((a>>i)&1) == 1)
     {
       uint64_t b1 = b;
-      int j=0;
-      for(;j<i;j++)
+      for(int j=0;j<i;j++)
       {
         b1 = plusmod(b1,b1,m);
       }
