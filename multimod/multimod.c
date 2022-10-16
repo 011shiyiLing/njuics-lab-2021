@@ -61,8 +61,7 @@ uint64_t plusmod(uint64_t a,uint64_t b,uint64_t m)
 uint64_t multimod(uint64_t a, uint64_t b, uint64_t m) 
 {
   uint64_t res = 0;
-  int i =1;
-  for(;i<64;i++)
+  for(int i=1;i<64;i++)
   {
     if(((a>>i)&1) != 0)
     {
@@ -75,7 +74,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
     }
     
   } 
- if((a&1) == 0) res = plusmod(res,b,m);
+ if((a&1) == 1) res = plusmod(res,b,m);
  return res;
 }
 
