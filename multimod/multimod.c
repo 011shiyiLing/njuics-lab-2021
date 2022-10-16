@@ -56,11 +56,8 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
       {
         res = res - m;
       }
-    }
-    if(exp < smaxmum && exp < a)
-    {
-       exp = exp << 1;
-    }
+    
+    exp = exp << 1;
     if(exp > m)
     {
       exp = exp -m;
