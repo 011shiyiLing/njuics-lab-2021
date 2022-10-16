@@ -76,7 +76,7 @@ uint64_t multimod(uint64_t a, uint64_t b, uint64_t m)
     }
     
   } 
- if((a&1) == 1) res = plusmod(res,b,m);
+ if(((a>>0)&1) == 1) res = plusmod(res,b,m);
  return res;
 }
 
