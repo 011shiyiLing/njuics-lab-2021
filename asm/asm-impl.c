@@ -3,14 +3,10 @@
 
 int64_t asm_add(int64_t a, int64_t b) {
   //return a + b;
-  int c;
   asm(
-    "add %1, %2;"
-    "mov %2, %0;"
-    : "=r"(c)//output
+    "lea (%rdi,%rsi,1),%eax"
     : "r"(a),"r"(b)//input
   );
-  return c;
 }
 
 int asm_popcnt(uint64_t x) {
