@@ -5,8 +5,8 @@ int64_t asm_add(int64_t a, int64_t b) {
   //return a + b;
   int c;
   asm(
-    "addl %1, %2;"
-    "movl %2, %0;"
+    "add %1, %2;"
+    "mov %2, %0;"
     : "=r"(c)//output
     : "r"(a),"r"(b)//input
   );
