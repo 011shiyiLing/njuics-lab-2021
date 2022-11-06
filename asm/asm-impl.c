@@ -10,7 +10,7 @@ int64_t asm_add(int64_t a, int64_t b) {
     //: "=a"(c)//output
     //: "d"(a),"s"(b)//input
   );
-  //return c;
+  return 0;
 }
 
 int asm_popcnt(uint64_t x) {
