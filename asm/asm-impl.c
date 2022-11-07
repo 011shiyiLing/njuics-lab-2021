@@ -17,8 +17,8 @@ int asm_popcnt(uint64_t x) {
   asm volatile(
          "pushq %rbp;"
          "movq %rsp,%rbp;"
-         "movl -8(%rbp);"
-         "movl -4(%rbp);"
+         "movl $0,-8(%rbp);"
+         "movl $0,-4(%rbp);"
          "jmp .L2;"
     ".L1: movl -4(%rbp),%eax;"
          "movq %rdi,%rdx;"
@@ -34,7 +34,7 @@ int asm_popcnt(uint64_t x) {
          "jle .L1;"
          "movl -8(%rbp),%eax;"
          "popq %rbp;"
-         "retl;"
+         "ret;"
   );
   return 0;
 }
