@@ -17,11 +17,11 @@ int asm_popcnt(uint64_t x) {
     if ((x >> i) & 1) s++;
   }*/
   asm volatile(
-    "cmpl $63,%1;"
+    "cmpl $63,%2;"
     "jle .L1;"
-    "movl %0,%eax;"
+    "movl %1,%eax;"
     "retl;"
-    ".L1: movl %1,%eax;"
+    ".L1: movl %2,%eax;"
     "movq %rdi,%rdx;"
     "movl %eax,%ecx;"
     "shrq %cl,%rdx;"
@@ -29,8 +29,8 @@ int asm_popcnt(uint64_t x) {
     "andl $1,%eax;"
     "testq %rax,%rax;"
     "je .L3;"
-    "addl $1,%2;"
-    ".L3: addl $1,%1;"
+    "addl $1,%1;"
+    ".L3: addl $1,%2;"
     :"=r"(s)
     :"r"(s),"r"(i)
   );
