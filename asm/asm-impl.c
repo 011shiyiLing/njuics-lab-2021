@@ -17,7 +17,7 @@ int asm_popcnt(uint64_t x) {
   }*/
   asm(
     "pushq %rbp;"
-    "movl %rdi,-24(%rbp);"
+    "movq %rdi,-24(%rbp);"
     "movl $0,-8(%rbp);"
     "movl $0, -4(%rbp);"
     "jmp .L2;"
