@@ -42,14 +42,16 @@ int asm_popcnt(uint64_t x) {
 void *asm_memcpy(void *dest, const void *src, size_t n) {
   //return memcpy(dest, src, n);
   asm volatile(
+    "pushw %ecx;"
     "shr $2, %2;"
     "cld;" //set DF = 0
     "rep; movsl;"
-    "mov %3, %%ecx;"
+    "popw %ecx;"
+    //"mov %3, %%ecx;"
     "and $3, %%ecx;" //对%cx取余
     "rep; movsb;"
-    //: //output
-    :"D"(dest),"S"(src),"c"(n),"m"(n)//input
+    : //output
+    :"D"(dest),"S"(src),"c"(n)//input
   );
   return dest;
 }
