@@ -25,7 +25,7 @@ int asm_popcnt(uint64_t x) {
          "movl %eax,%ecx;"
          "shrq %cl,%rdx;"
          "movq %rdx,%rax;"
-         //"andl $1,%eax;"
+         "andl $1,%eax;"
          "testq %rax,%rax;"
          "je .L3;"
          "addl $1,-8(%rbp);"
