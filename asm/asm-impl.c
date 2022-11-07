@@ -15,7 +15,7 @@ int asm_popcnt(uint64_t x) {
   for (int i = 0; i < 64; i++) {
     if ((x >> i) & 1) s++;
   }*/
-  asm(
+  asm volatile(
     "pushq %rbp;"
     "movl $0,-8(%rbp);"
     "movl $0, -4(%rbp);"
