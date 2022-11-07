@@ -3,7 +3,7 @@
 
 int64_t asm_add(int64_t a, int64_t b) {
   //return a + b;
-  asm(
+  asm volatile(
     "lea (%rdi,%rsi,1),%eax;"
     "retq;"
   );
@@ -11,9 +11,9 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t x) {
-  /*for (int i = 0; i < 64; i++) {
-    if ((x >> i) & 1) s++;
-  }*/
+  //for (int i = 0; i < 64; i++) {
+    //if ((x >> i) & 1) s++;
+  //}
   asm volatile(
          "pushq %rbp;"
          "movq %rsp,%rbp;"
@@ -40,7 +40,18 @@ int asm_popcnt(uint64_t x) {
 }
 
 void *asm_memcpy(void *dest, const void *src, size_t n) {
-  return memcpy(dest, src, n);
+  //return memcpy(dest, src, n);
+  asm volatile(
+    "shr $2, %2;"
+    "cld;" //set DF = 0
+    "rep; movsl"
+    "mov %3, %ecx;"
+    "and $3, %ecx;" //对%cx取余
+    "rep; movsb"
+    : //output
+    :"D"(dest),"S"(src),"c"(n)//input
+  );
+  return dest;
 }
 
 /*int asm_setjmp(asm_jmp_buf env) {
