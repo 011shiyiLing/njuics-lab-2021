@@ -43,7 +43,7 @@ int asm_popcnt(uint64_t x) {
     ".L3:"
     "addl $1,-4(%rbp);"
   );
-  return 0;
+  //return 0;
 }
 
 /*void *asm_memcpy(void *dest, const void *src, size_t n) {
