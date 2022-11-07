@@ -17,14 +17,13 @@ int asm_popcnt(uint64_t x) {
   }*/
   asm(
     "pushq %rbp;"
-    "movq %rdi,-24(%rbp);"
     "movl $0,-8(%rbp);"
     "movl $0, -4(%rbp);"
     "jmp .L2;"
 
   ".L1:"
     "movl -4(%rbp),%eax;"
-    "movq -24(%rbp),%rdx;"
+    "movq %rdi,%rdx;"
     "movl %eax,%ecx;"
     "shrq %cl,%rdx;"
     "movq %rdx,%rax;"
