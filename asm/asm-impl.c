@@ -22,7 +22,7 @@ int asm_popcnt(uint64_t x) {
     "movl $0, -4(%rbp);"
     "jmp .L2;"
 
-    ".L1:"
+  ".L1:"
     "movl -4(%rbp),%eax;"
     "movq -24(%rbp),%rdx;"
     "movl %eax,%ecx;"
@@ -33,17 +33,17 @@ int asm_popcnt(uint64_t x) {
     "je .L3;"
     "addl $1,-8(%rbp);"
 
-    ".L2:"
+  ".L2:"
     "cmpl $63,-4(%rbp);"
     "jle .L1;"
     "movl -8(%rbp),%eax;"
     "popq %rbp;"
     "ret;"
 
-    ".L3:"
+  ".L3:"
     "addl $1,-4(%rbp);"
   );
-  //return 0;
+  return 0;
 }
 
 /*void *asm_memcpy(void *dest, const void *src, size_t n) {
