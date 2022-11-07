@@ -48,7 +48,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     "mov %3, %%ecx;"
     "and $3, %%ecx;" //对%cx取余
     "rep; movsb;"
-    : //output
+    //: //output
     :"D"(dest),"S"(src),"c"(n),"m"(n)//input
   );
   return dest;
