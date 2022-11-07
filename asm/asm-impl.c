@@ -11,17 +11,17 @@ int64_t asm_add(int64_t a, int64_t b) {
 }
 
 int asm_popcnt(uint64_t x) {
-  /*int s = 0;
-  for (int i = 0; i < 64; i++) {
+  int s = 0;
+  int i = 0;
+  /*for (int i = 0; i < 64; i++) {
     if ((x >> i) & 1) s++;
   }*/
   asm volatile(
-    "pushq %rbp;"
-    "movl $0,-8(%rbp);"
-    "movl $0, -4(%rbp);"
-    "jmp .L2;"
-
-    ".L1: movl -4(%rbp),%eax;"
+    "cmpl $63,%1;"
+    "jle .L1;"
+    "movl %0,%eax;"
+    "retl;"
+    ".L1: movl %1,%eax;"
     "movq %rdi,%rdx;"
     "movl %eax,%ecx;"
     "shrq %cl,%rdx;"
@@ -29,15 +29,9 @@ int asm_popcnt(uint64_t x) {
     "andl $1,%eax;"
     "testq %rax,%rax;"
     "je .L3;"
-    "addl $1,-8(%rbp);"
-
-   ".L2:  cmpl $63,-4(%rbp);"
-    "jle .L1;"
-    "movl -8(%rbp),%eax;"
-    "popq %rbp;"
-    "ret;"
-
-    ".L3: addl $1,-4(%rbp);"
+    "addl $1,%2;"
+    ".L3: addl $1,%1;"
+    :"r"(s),"r"(i)
   );
   return 0;
 }
