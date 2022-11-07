@@ -45,11 +45,11 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
     "shr $2, %2;"
     "cld;" //set DF = 0
     "rep; movsl;"
-    "mov %2, %%ecx;"
+    "mov %3, %%ecx;"
     "and $3, %%ecx;" //对%cx取余
     "rep; movsb;"
     : //output
-    :"D"(dest),"S"(src),"c"(n)//input
+    :"D"(dest),"S"(src),"c"(n),"m"(n)//input
   );
   return dest;
 }
