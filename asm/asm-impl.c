@@ -31,6 +31,7 @@ int asm_popcnt(uint64_t x) {
     "je .L3;"
     "addl $1,%2;"
     ".L3: addl $1,%1;"
+    :"=r"(s)
     :"r"(s),"r"(i)
   );
   return 0;
