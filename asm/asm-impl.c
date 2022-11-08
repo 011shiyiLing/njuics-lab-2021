@@ -55,7 +55,7 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 }
 
 int asm_setjmp(asm_jmp_buf env) {
-  return setjmp(env);
+  return _setjmp(env);
   //return 0;
 }
 
