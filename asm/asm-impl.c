@@ -17,19 +17,18 @@ int asm_popcnt(uint64_t x) {
   asm volatile(
          "pushq %rbp;"
          "movq %rsp,%rbp;"
-         "movl $0,-8(%rbp);"
-         "movl $0,-4(%rbp);"
+         "movl $0,-8(%rbp);"//s=0
+         "movl $0,-4(%rbp);"//i=0
          "jmp .L2;"
-    ".L1: movl -4(%rbp),%eax;"
-         "movq %rdi,%rdx;"
-         "movl %eax,%ecx;"
+    ".L1: movq %rdi,%rdx;"
+         "movl -4(%rbp),%ecx;"
          "shrq %cl,%rdx;"
          "andl $1,%edx;"
-         "testq %rdx,%rdx;"
-         "je .L3;"
+         "testq %rdx,%rdx;" //是0，ZF位置1;不是0，ZF位置0
+         "je .L3;" //when ZF=0 jump
          "addl $1,-8(%rbp);"
     ".L3: addl $1,-4(%rbp);"
-    ".L2: cmpl $63,-4(%rbp);"
+    ".L2: cmpl $63,-4(%rbp);"//i <= 63
          "jle .L1;"
          "movl -8(%rbp),%eax;"
          "popq %rbp;"
