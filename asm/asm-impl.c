@@ -24,7 +24,8 @@ int asm_popcnt(uint64_t x) {
          "movl -4(%rbp),%ecx;"
          "shrq %cl,%rdx;"
          "andl $1,%edx;"
-         "testq %rdx,%rdx;" //是0，ZF位置1;不是0，ZF位置0
+         "cmp $0,%rdx"
+         //"testq %rdx,%rdx;" //是0，ZF位置1;不是0，ZF位置0
          "je .L3;" //when ZF=0 jump
          "addl $1,-8(%rbp);" //s++
     ".L3: addl $1,-4(%rbp);" //i++
