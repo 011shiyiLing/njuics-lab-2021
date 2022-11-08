@@ -1,5 +1,6 @@
 #include "asm.h"
 #include <string.h>
+#include <setjmp.h>
 
 int64_t asm_add(int64_t a, int64_t b) {
   //return a + b;
@@ -24,7 +25,6 @@ int asm_popcnt(uint64_t x) {
          "movq %rdi,%rdx;"
          "movl %eax,%ecx;"
          "shrq %cl,%rdx;"
-         //"movq %rdx,%rax;"
          "andl $1,%edx;"
          "testq %rdx,%rdx;"
          "je .L3;"
@@ -55,10 +55,10 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 }
 
 int asm_setjmp(asm_jmp_buf env) {
-  //return setjmp(env);
-  return 0;
+  return setjmp(env);
+  //return 0;
 }
 
 void asm_longjmp(asm_jmp_buf env, int val) {
- //longjmp(env, val);
+ longjmp(env, val);
 }
