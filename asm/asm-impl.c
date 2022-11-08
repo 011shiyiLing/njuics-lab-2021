@@ -56,34 +56,16 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 int asm_setjmp(asm_jmp_buf env) {
   //return setjmp(env);
   asm volatile(
-    "push ebp;"
-    "mov ebp,esp;"
-    "sub esp,0x40;"
-    "push esi;"
-    "push ebx;"
-
-    "mov eax,0;"
-    "mov ebx,[ebp+8];"
-
-    "mov [ebx],eax;"
-    "mov [ebx+4],ecx;"
-    "mov [ebx+8],edx;"
-    "mov [ebx+12],esi;"
-    "mov [ebx+16],edi;"
-
-    "lea esi,[ebp+4];"
-    "mov [ebx+20],esi;"
-
-    "mov esi,[ebp];"
-    "mov [ebx+24],esi;"
-
-    "mov esi,[ebp+4];"
-    "mov [ebx+32],esi;"
-
-    "pop ebx;"
-    "pop esi;"
-    "mov esp,ebp;"
-    "pop ebp;"
+    "movq %rbx,0(%rdi);"
+    "movq %rbp,8(%rdi);"
+    "movq %r12,16(%rdi);"
+    "movq %r13,24(%rdi);"
+    "movq %r14,32(%rdi);"
+    "movq %r15,40(%rdi);"
+    "leaq 8(%rsp),%rdx;"
+    "movq %rdx,48(%rdi);"
+    "movq (%rsp),%rax;"
+    "movq %rax,56(%rdi);"
     "ret;"
   );
   return 0;
@@ -91,7 +73,21 @@ int asm_setjmp(asm_jmp_buf env) {
 
 void asm_longjmp(asm_jmp_buf env, int val) {
  //longjmp(env, val);
- 
+ asm volatile(
+  "movq 48(%rdi),%r8;"
+  "movq 8(%rdi),%r9;"
+  "movq 56(%rdi),%rdx;"
+
+  "movq (%rdi),%rbx;"
+  "movq 16(%rdi),%r12;"
+  "movq 24(%rdi),%r13;"
+  "movq 32(%rdi),%r14;"
+  "movq 40(%rdi),%r15;"
+  "movl %esi,%eax;"
+  "movq %r8,%rsp;"
+  "movq %r9,%rbp;"
+  "jmpq *%rdx;"
+ );
 }
 
 
