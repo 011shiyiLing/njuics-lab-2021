@@ -75,18 +75,17 @@ int asm_setjmp(asm_jmp_buf env) {
 void asm_longjmp(asm_jmp_buf env, int val) {
  //longjmp(env, val);
  asm volatile(
-  //"movq 48(%rdi),%r8;"
-  //"movq 8(%rdi),%r9;"
-  "movq 56(%rdi),%rdx;"
+  "movq 56(%rdi),%rdx;"//PC的值存入rdx
   "movq (%rdi),%rbx;"
+  "movq 8(%rdi),%rbp;"
   "movq 16(%rdi),%r12;"
   "movq 24(%rdi),%r13;"
   "movq 32(%rdi),%r14;"
   "movq 40(%rdi),%r15;"
-  "movl %esi,%eax;"
+  "movl %esi,%eax;"//将val设为setjmp的返回值
   "movq 48(%rdi),%rsp;"
-  "movq 8(%rdi),%rbp;"
-  "jmpq *%rdx;"
+  //"movq 8(%rdi),%rbp;"
+  "jmpq *%rdx;"//通过jmp指令实现PC寄存器的加载
  );
 }
 
