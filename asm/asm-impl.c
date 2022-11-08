@@ -4,7 +4,7 @@
 int64_t asm_add(int64_t a, int64_t b) {
   //return a + b;
   asm volatile(
-    "lea (%rdi,%rsi,1),%eax;"
+    "lea (%rdi,%rsi,1),%rax;"
     "retq;"
   );
   return 0;
