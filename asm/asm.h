@@ -2,7 +2,14 @@
 #include <stddef.h>
 
 // TODO: replace with your definition
-#include <setjmp.h> // remove this
+//#include <setjmp.h> // remove this
+typedef long long int __jmp_buf[8];//x86-64
+struct __jmp_buf_tag
+{
+    __jmp_buf __jmpbuf;
+};
+typedef struct __jmp_buf_tag jmp_buf[1];
+
 #define asm_jmp_buf jmp_buf
 
 int64_t asm_add(int64_t a, int64_t b);

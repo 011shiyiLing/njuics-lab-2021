@@ -1,6 +1,5 @@
 #include "asm.h"
 #include <string.h>
-#include <setjmp.h>
 
 int64_t asm_add(int64_t a, int64_t b) {
   //return a + b;
@@ -55,10 +54,43 @@ void *asm_memcpy(void *dest, const void *src, size_t n) {
 }
 
 int asm_setjmp(asm_jmp_buf env) {
-  return _setjmp(env);
-  //return 0;
+  //return setjmp(env);
+  asm volatile(
+    "push ebp;"
+    "mov ebp,esp;"
+    "sub esp,0x40;"
+    "push esi;"
+    "push ebx;"
+
+    "mov eax,0;"
+    "mov ebx,[ebp+8];"
+
+    "mov [ebx],eax;"
+    "mov [ebx+4],ecx;"
+    "mov [ebx+8],edx;"
+    "mov [ebx+12],esi;"
+    "mov [ebx+16],edi;"
+
+    "lea esi,[ebp+4];"
+    "mov [ebx+20],esi;"
+
+    "mov esi,[ebp];"
+    "mov [ebx+24],esi;"
+
+    "mov esi,[ebp+4];"
+    "mov [ebx+32],esi;"
+
+    "pop ebx;"
+    "pop esi;"
+    "mov esp,ebp;"
+    "pop ebp;"
+    "ret;"
+  );
+  return 0;
 }
 
 void asm_longjmp(asm_jmp_buf env, int val) {
  longjmp(env, val);
 }
+
+
