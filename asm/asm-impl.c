@@ -67,7 +67,7 @@ int asm_setjmp(asm_jmp_buf env) {
     "movq (%rsp),%rax;"//save PC we are returning now
     "movq %rax,56(%rdi);"
     "xorl %eax,%eax;"
-    "retq;"
+    "retl;"
   );
   return 0;
 }
