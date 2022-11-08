@@ -2,14 +2,14 @@
 #include <stddef.h>
 
 // TODO: replace with your definition
-typedef long long int __jmp_buf[8];//(x86-64)8个寄存器（RBX、RBP、RSP、R12、R13、R14 、 R15 及PC）的值，就保存在此变量中
-struct __jmp_buf_tag
+typedef long int jmp_buf[8];//(x86-64)8个寄存器（RBX、RBP、RSP、R12、R13、R14 、 R15 及PC）的值，就保存在此变量中
+struct jmp_buf_tag
 {
-    __jmp_buf __jmpbuf;
+    jmp_buf jmpbuf;
 };
-typedef struct __jmp_buf_tag jmp_buf[1];
+typedef struct jmp_buf_tag asm_jmp_buf[1];
 
-#define asm_jmp_buf jmp_buf
+//#define asm_jmp_buf jmp_buf
 
 int64_t asm_add(int64_t a, int64_t b);
 int     asm_popcnt(uint64_t x);
