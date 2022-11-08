@@ -82,9 +82,8 @@ void asm_longjmp(asm_jmp_buf env, int val) {
   "movq 24(%rdi),%r13;"
   "movq 32(%rdi),%r14;"
   "movq 40(%rdi),%r15;"
-  "movl %esi,%eax;"//将val设为setjmp的返回值
   "movq 48(%rdi),%rsp;"
-  //"movq 8(%rdi),%rbp;"
+  "movl %esi,%eax;"//将val设为setjmp的返回值
   "jmpq *%rdx;"//通过jmp指令实现PC寄存器的加载
  );
 }
