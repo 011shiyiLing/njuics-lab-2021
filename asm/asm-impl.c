@@ -28,7 +28,7 @@ int asm_popcnt(uint64_t x) {
          "je .L3;" //when ZF=0 jump
          "addl $1,-8(%rbp);" //s++
     ".L3: addl $1,-4(%rbp);" //i++
-    ".L2: cmpl $63,-4(%rbp);"//i <= 63
+    ".L2: cmpl $63,-4(%rbp);"//i <= 63 ?
          "jle .L1;"
          "movl -8(%rbp),%eax;"
          "popq %rbp;"
