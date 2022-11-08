@@ -19,15 +19,15 @@ int asm_popcnt(uint64_t x) {
          "movq %rsp,%rbp;"
          "movl $0,-8(%rbp);"//s=0
          "movl $0,-4(%rbp);"//i=0
-         "jmp .L2;"
+         "jmp .L2;" //no condition jump
     ".L1: movq %rdi,%rdx;"
          "movl -4(%rbp),%ecx;"
          "shrq %cl,%rdx;"
          "andl $1,%edx;"
          "testq %rdx,%rdx;" //是0，ZF位置1;不是0，ZF位置0
          "je .L3;" //when ZF=0 jump
-         "addl $1,-8(%rbp);"
-    ".L3: addl $1,-4(%rbp);"
+         "addl $1,-8(%rbp);" //s++
+    ".L3: addl $1,-4(%rbp);" //i++
     ".L2: cmpl $63,-4(%rbp);"//i <= 63
          "jle .L1;"
          "movl -8(%rbp),%eax;"
