@@ -1,6 +1,7 @@
 #include "asm.h"
 #include <assert.h>
 #include <stdio.h>
+#include <setjmp.h>
 
 int main() {
   /*if(asm_add(1,1) == 2) printf("PASSED.\n");
