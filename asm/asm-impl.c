@@ -63,7 +63,7 @@ int asm_setjmp(asm_jmp_buf env) {
     "movq %r14,32(%rdi);"
     "movq %r15,40(%rdi);"
     //"leaq 8(%rsp),%rdx;" //save SP as it will be after we return
-    "mov 8(%rsp),48(%rdi);"
+    "movl 8(%rsp),48(%rdi);"
     "movq (%rsp),%rax;"//save PC we are returning now
     "movq %rax,56(%rdi);"
     "xorl %eax,%eax;"
