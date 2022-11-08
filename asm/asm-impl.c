@@ -65,7 +65,7 @@ int asm_setjmp(asm_jmp_buf env) {
     "movq %rdx,48(%rdi);"
     "movq (%rsp),%rax;"//save PC we are returning now
     "movq %rax,56(%rdi);"
-    "xorl %eax,%eax;"
+    "movl $0,%eax;" //置eax为0，即首次调用后，返回值是0
     "ret;"
   );
   return 0;
