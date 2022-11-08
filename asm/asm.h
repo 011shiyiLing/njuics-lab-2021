@@ -2,9 +2,7 @@
 #include <stddef.h>
 
 // TODO: replace with your definition
-typedef long int asm_jmp_buf[8];//(x86-64)8个寄存器（RBX、RBP、RSP、R12、R13、R14 、 R15 及PC）的值，就保存在此变量中
-
-//#define asm_jmp_buf jmp_buf
+typedef long long int asm_jmp_buf[8];//(x86-64)8个寄存器（RBX、RBP、RSP、R12、R13、R14 、 R15 及PC）的值，就保存在此变量中
 
 int64_t asm_add(int64_t a, int64_t b);
 int     asm_popcnt(uint64_t x);
