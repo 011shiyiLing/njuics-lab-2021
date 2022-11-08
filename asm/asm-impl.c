@@ -66,7 +66,7 @@ int asm_setjmp(asm_jmp_buf env) {
     "movq %rdx,48(%rdi);"
     "movq (%rsp),%rax;"
     "movq %rax,56(%rdi);"
-    //"xorl %eax,%eax;"
+    "xorl %eax,%eax;"
     "retq;"
   );
   return 0;
