@@ -7,7 +7,7 @@
 
 static bool is_prime[N];
 static int  primes[N];
-int sqrt(int val)
+int sqrt_fast(int val)
 {
   int n;
   int i;
@@ -41,7 +41,7 @@ int sqrt(int val)
 
 int *sieve(int n) { 
   assert(n + 1 < N);
-  int m = sqrt(n+1);
+  int m = sqrt_fast(n+1);
   //for (int i = 0; i <= n; i++)
     //is_prime[i] = true;
   memset(is_prime,true,n);
