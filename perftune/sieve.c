@@ -7,7 +7,7 @@
 #define E 1e-10
 
 static bool is_prime[N];
-static int  primes[N];
+static int  primes[N],cnt;
 
 double Abs(double a,double b)
 {
@@ -30,12 +30,11 @@ double Sqrt(double val)
 
 int *sieve(int n) { 
   assert(n + 1 < N);
-  int m = Sqrt(n+0.5);
   //for (int i = 0; i <= n; i++)
     //is_prime[i] = true;
-  memset(is_prime,true,n);
+  //memset(is_prime,true,n);
 
-  for (int i = 2; i <= n/i; i++) {
+  /*for (int i = 2; i <= n/i; i++) {
     for (int j = i + i; j <= n; j += i) {
       is_prime[j] = false;
     }
@@ -47,5 +46,15 @@ int *sieve(int n) {
       *p++ = i;
     }
   *p = 0;
-  return primes;
+  return primes;*/
+
+  for(int i=2;i <= n;i++)
+  {
+    if(!is_prime[i]) primes[cnt++] = i;
+    for(int j=0; primes[j] <= n/i; j++)
+    {
+      is_prime[primes[j]*i] = true;
+      if(i % primes[j]) break;
+    }
+  }
 }
