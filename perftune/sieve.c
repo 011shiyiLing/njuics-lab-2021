@@ -5,7 +5,7 @@
 
 #define N 10000000
 
-static bool is_prime[N]={1,1};
+static int is_prime[N];
 static int  primes[N],cnt;
 
 
@@ -29,13 +29,15 @@ int *sieve(int n) {
     }
   *p = 0;
   return primes;*/
-
-  for(int i=2;i <= n;i++)
+  memset(is_prime,1,sizeof(is_prime));
+  is_prime[0] = is_prime[1] = is_prime[4] = 0;
+  is_prime[2] = 1;
+  for(int i=3;i <= n;i += 2)
   {
-    if(!is_prime[i]) primes[cnt++] = i;
-    for(int j=0; primes[j] <= n/i; j++)
+    if(is_prime[i]) primes[cnt++] = i;
+    for(int j=1; primes[j] * i <= n && j <= cnt; j++)
     {
-      is_prime[primes[j]*i] = true;
+      is_prime[primes[j]*i] = 0;
       if(i % primes[j] == 0) break;//only mark once
     }
   }
