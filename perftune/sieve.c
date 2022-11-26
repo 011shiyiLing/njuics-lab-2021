@@ -4,32 +4,14 @@
 #include <stdio.h>
 
 #define N 10000000
-//#define E 1e-10
 
-static bool is_prime[N];
+static bool is_prime[N]={1,1};
 static int  primes[N],cnt;
 
-/*double Abs(double a,double b)
-{
-  if(a - b < 0) return b-a;
-  return a-b;
-}
-double Sqrt(double val)
-{
-  double i,last=0,cur=0;
-  for(i=0;i*i<val;i++);
-  i--;
-  do{
-    last = cur;
-    i = (val/i+i)/2;
-    cur = i*i;
-  }while(Abs(cur,last) > E);
-  return i;
-}*/
 
 
 int *sieve(int n) { 
-  assert(n + 1 < N);
+  //assert(n + 1 < N);
   //for (int i = 0; i <= n; i++)
     //is_prime[i] = true;
   //memset(is_prime,true,n);
@@ -51,10 +33,10 @@ int *sieve(int n) {
   for(int i=2;i <= n;i++)
   {
     if(!is_prime[i]) primes[cnt++] = i;
-    for(int j=0; primes[j] <= n/i; j++)
+    for(int j=1; primes[j] <= n/i; j++)
     {
       is_prime[primes[j]*i] = true;
-      if(i % primes[j] == 0) break;
+      if(i % primes[j] == 0) break;//only mark once
     }
   }
   return primes;
