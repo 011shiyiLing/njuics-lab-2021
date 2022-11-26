@@ -29,15 +29,14 @@ int *sieve(int n) {
     }
   *p = 0;
   return primes;*/
-  memset(is_prime,0,sizeof(is_prime));
-  //is_prime[2] = 1;
+  memset(is_prime,1,sizeof(is_prime));
   primes[cnt++] = 2;
   for(int i=3;i <= n;i += 2)
   {
-    if(!is_prime[i]) primes[cnt++] = i;
+    if(is_prime[i]) primes[cnt++] = i;
     for(int j=1; primes[j] * i <= n && j <= cnt; j++)
     {
-      is_prime[primes[j]*i] = 1;
+      is_prime[primes[j]*i] = 0;
       if(i % primes[j] == 0) break;//only mark once
     }
   }
