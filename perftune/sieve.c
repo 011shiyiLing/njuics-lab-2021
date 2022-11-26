@@ -42,7 +42,7 @@ int *sieve(int n) {
   }
 
   int *p = primes;
-  for (int i = 2; i <= n; i++)
+  for (int i = 2; i <= m; i++)
     if (is_prime[i]) {
       *p++ = i;
     }
