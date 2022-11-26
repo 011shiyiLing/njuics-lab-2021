@@ -57,4 +57,5 @@ int *sieve(int n) {
       if(i % primes[j]) break;
     }
   }
+  return primes;
 }
