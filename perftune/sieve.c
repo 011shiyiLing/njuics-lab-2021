@@ -11,7 +11,7 @@ static int  primes[N],cnt;
 
 
 int *sieve(int n) { 
-  assert(n + 1 < N);
+  //assert(n + 1 < N);
   //for (int i = 0; i <= n; i++)
     //is_prime[i] = true;
   //memset(is_prime,true,n);
@@ -33,7 +33,7 @@ int *sieve(int n) {
   for(int i=2;i <= n;i++)
   {
     if(!is_prime[i]) primes[cnt++] = i;
-    for(int j=1; primes[j] <= n/i; j++)
+    for(int j=0; primes[j] <= n/i; j++)
     {
       is_prime[primes[j]*i] = true;
       if(i % primes[j] == 0) break;//only mark once
