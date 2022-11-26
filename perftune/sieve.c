@@ -5,7 +5,7 @@
 
 #define N 10000000
 
-static bool is_prime[N]={1,1};
+static bool is_prime[N];
 static int  primes[N],cnt;
 
 
