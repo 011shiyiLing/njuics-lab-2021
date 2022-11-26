@@ -5,6 +5,7 @@
 #include <math.h>
 
 #define N 10000000
+double sqrt(double x);
 
 static bool is_prime[N];
 static int  primes[N];
