@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #define N 10000000
-#define E 1e-10
+//#define E 1e-10
 
 static bool is_prime[N];
 static int  primes[N],cnt;
