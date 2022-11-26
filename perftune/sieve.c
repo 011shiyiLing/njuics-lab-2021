@@ -9,7 +9,7 @@
 static bool is_prime[N];
 static int  primes[N],cnt;
 
-double Abs(double a,double b)
+/*double Abs(double a,double b)
 {
   if(a - b < 0) return b-a;
   return a-b;
@@ -25,7 +25,7 @@ double Sqrt(double val)
     cur = i*i;
   }while(Abs(cur,last) > E);
   return i;
-}
+}*/
 
 
 int *sieve(int n) { 
@@ -54,7 +54,7 @@ int *sieve(int n) {
     for(int j=0; primes[j] <= n/i; j++)
     {
       is_prime[primes[j]*i] = true;
-      if(i % primes[j]) break;
+      if(i % primes[j] == 0) break;
     }
   }
   return primes;
