@@ -8,15 +8,13 @@
 static bool is_prime[N];
 static int  primes[N],cnt;
 
-
-
 int *sieve(int n) { 
-  //assert(n + 1 < N);
+  assert(n + 1 < N);
   //for (int i = 0; i <= n; i++)
     //is_prime[i] = true;
   //memset(is_prime,true,n);
 
-  /*for (int i = 2; i <= n/i; i++) {
+  /*for (int i = 2; i <= n; i++) {
     for (int j = i + i; j <= n; j += i) {
       is_prime[j] = false;
     }
@@ -29,8 +27,10 @@ int *sieve(int n) {
     }
   *p = 0;
   return primes;*/
+
+  //欧拉筛法（优化版） T(n) = O(n/2);
   primes[cnt++] = 2;
-  for(int i=3;i <= n;i += 2)
+  for(int i=3;i <= n;i += 2)//所有素数里只有2是偶数
   {
     if(!is_prime[i]) primes[cnt++] = i;
     for(int j=1; primes[j] * i <= n && j <= cnt; j++)
