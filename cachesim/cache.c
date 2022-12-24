@@ -18,15 +18,15 @@ typedef struct
 }cache_line;
 
 static cache_line *cache;
-int group_width,every_group_line;
-uint64_t line_num,group_num;
+static int group_width,every_group_line;
+static uint64_t line_num,group_num;
 
 //随机替换
 int random_replacement(int group_no)
 {
   int random_num = rand();
   int replace_no = group_no*every_group_line + (random_num  % every_group_line);
-  //write back
+  //write back(只有当cache行中的主存快被替换时，才将该主存快内容一次性写回主存)
   if(cache[replace_no].dirty_bit == 1)
   {
     uintptr_t block_num = (cache[replace_no].tag << group_width) + group_no;
