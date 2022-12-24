@@ -131,15 +131,16 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 // 将所有 valid bit 置为无效即可
 void init_cache(int total_size_width, int associativity_width) {
   group_width = total_size_width - 6 - associativity_width;
-  group_num = 1 << (group_width);
-  line_num = 1 << (total_size_width - 6);
-  every_group_line = 1 << (associativity_width);
-  cache = (cache_line *)malloc(sizeof(cache_line)*line_num);
+  group_num = 1 << (group_width); //cache总组数
+  line_num = 1 << (total_size_width - 6); //cache总行数
+  every_group_line = 1 << (associativity_width); //cache每组的行数 “几路总相联”
 
+  cache = (cache_line *)malloc(sizeof(cache_line)*line_num);
   for(int i=0; i<line_num; i++)
   {
     cache[i].valid = 0;
     cache[i].dirty_bit = 0;
+    cache[i].tag = 0;
   }
 }
 
