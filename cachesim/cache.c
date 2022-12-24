@@ -26,6 +26,7 @@ int random_replacement(int group_no)
 {
   int random_num = rand();
   int replace_no = group_no*every_group_line + (random_num  % every_group_line);
+
   //write back(只有当cache行中的主存快被替换时，才将该主存快内容一次性写回主存)
   if(cache[replace_no].dirty_bit == 1)
   {
@@ -63,7 +64,7 @@ uint32_t cache_read(uintptr_t addr) {
       mem_read(block_num,(uint8_t *)cache[i].data);
       cache[i].valid = 1;
       cache[i].tag = tag;
-      cache[i].dirty_bit = 0;
+      cache[i].dirty_bit = 1;
       return cache[i].data[group_addr];
     }
   }
