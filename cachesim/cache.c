@@ -31,9 +31,10 @@ int random_replacement(int group_no)
   if(cache[replace_no].dirty_bit == 1)
   {
     uintptr_t block_num = (cache[replace_no].tag << group_width) + group_no;
-    cache[replace_no].valid = 0;
     mem_write(block_num,(uint8_t *)cache[replace_no].data);
-    cache[replace_no].dirty_bit = 0; 
+    cache[replace_no].valid = 0;
+    cache[replace_no].dirty_bit = 0;
+    cache[replace_no].tag = 0; 
   }
   return replace_no;
 }
