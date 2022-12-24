@@ -25,7 +25,7 @@ static uint64_t line_num,group_num;
 //随机替换
 int random_replacement(int group_no)
 {
-  srand((unsigned)time(NULL));
+  srand((unsigned)time(NULL));//随机数种子
   int random_num = rand();
   int replace_no = group_no*every_group_line + (random_num  % every_group_line);
 
@@ -92,7 +92,8 @@ uint32_t cache_read(uintptr_t addr) {
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   int tag = addr >> (group_width + 6);//tag
   int group_no = (addr >> 6) & (mask_with_len(group_width)); //主存对应的cache组号
-  int group_addr = (addr&0x3f) >> 2;//组内地址
+  //int group_addr = (addr&0x3f) >> 2;//组内地址
+  int group_addr = (addr & mask_with_len(BLOCK_WIDTH)) & (~0x3);
 
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
