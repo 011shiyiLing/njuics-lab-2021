@@ -75,6 +75,7 @@ uint32_t cache_read(uintptr_t addr) {
   mem_read(block_num,(uint8_t *)cache[replacement_no].data);
   cache[replacement_no].valid = 1;
   cache[replacement_no].tag = tag;
+  cache[replacement_no].dirty_bit = 1;
   return cache[replacement_no].data[group_addr];
 }
 
