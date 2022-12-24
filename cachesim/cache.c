@@ -24,6 +24,7 @@ static uint64_t line_num,group_num;
 //随机替换
 int random_replacement(int group_no)
 {
+  srand((unsigned)time(NULL));
   int random_num = rand();
   int replace_no = group_no*every_group_line + (random_num  % every_group_line);
 
