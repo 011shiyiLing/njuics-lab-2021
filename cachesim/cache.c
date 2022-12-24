@@ -62,6 +62,7 @@ uint32_t cache_read(uintptr_t addr) {
       mem_read(block_num,(uint8_t *)cache[i].data);
       cache[i].valid = 1;
       cache[i].tag = tag;
+      cache[i].dirty_bit = 1;
       return cache[i].data[group_addr];
     }
   }
