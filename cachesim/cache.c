@@ -44,7 +44,7 @@ int random_replacement(int group_no)
 uint32_t cache_read(uintptr_t addr) {
   int tag = addr >> (group_width + 6);
   int group_no = (addr >> 6) & (group_num-1); //主存对应的cache组号
-  int group_addr = (addr & 6) >> 2;//
+  int group_addr = (addr & 6) & (~0x3);//
 
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
