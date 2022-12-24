@@ -32,7 +32,7 @@ int random_replacement(int group_no)
   //write back(只有当cache行中的主存快被替换时，才将该主存快内容一次性写回主存)
   if(cache[replace_no].dirty_bit == 1)
   {
-    uintptr_t block_num = (cache[replace_no].tag << group_width) + group_no;
+    uintptr_t block_num = (cache[replace_no].tag << group_width) + group_no;//主存块号
     mem_write(block_num,(uint8_t *)cache[replace_no].data);
     //clear
     for(int j=0; j<BLOCK_SIZE; j++)
