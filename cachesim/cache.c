@@ -62,7 +62,7 @@ uint32_t cache_read(uintptr_t addr) {
       mem_read(block_num,(uint8_t *)cache[i].data);
       cache[i].valid = 1;
       cache[i].tag = tag;
-      cache[i].dirty_bit = 1;
+      cache[i].dirty_bit = 0;
       return cache[i].data[group_addr];
     }
   }
@@ -87,29 +87,42 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   {
     if(cache[i].tag == tag)
     {
-      cache[i].data[group_addr] = data | (~wmask);
+      cache[i].data[group_addr] &= (~wmask);
+      cache[i].data[group_addr] |= (data & wmask);
       cache[i].dirty_bit = 1;
       cache[i].valid = 1;
+      return;
     }
   }
 
   //缺失,从内存中读入数据
   uintptr_t block_num = addr >> 6;//主存块号
+  int new_line;
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
     if(cache[i].valid == 0)
     {
       mem_read(block_num,(uint8_t *)cache[i].data);
-      cache[i].valid = 1;
       cache[i].tag = tag;
+      //write
+      cache[i].data[group_addr] &= (~wmask);
+      cache[i].data[group_addr] |= (data & wmask);
+      cache[i].dirty_bit = 1;
+      cache[i].valid = 1;
+      return;
     }
   }
 
   //满了，采取随机替换
   int replacement_no = random_replacement(group_no);
   mem_read(block_num,(uint8_t *)cache[replacement_no].data);
-  cache[replacement_no].valid = 1;
+  //write
   cache[replacement_no].tag = tag;
+  cache[replacement_no].data[group_addr] &= (~wmask);
+  cache[replacement_no].data[group_addr] |= (data & wmask);
+  cache[replacement_no].dirty_bit = 1;
+  cache[replacement_no].valid = 1;
+  return;
 
 }
 
