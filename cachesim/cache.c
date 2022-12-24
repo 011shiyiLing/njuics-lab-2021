@@ -32,6 +32,11 @@ int random_replacement(int group_no)
   {
     uintptr_t block_num = (cache[replace_no].tag << group_width) + group_no;
     mem_write(block_num,(uint8_t *)cache[replace_no].data);
+    
+    for(int j=0; j<BLOCK_SIZE; j++)
+    {
+      cache[replace_no].data[j] = 0;
+    }
     cache[replace_no].valid = 0;
     cache[replace_no].dirty_bit = 0;
     cache[replace_no].tag = 0; 
