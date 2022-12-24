@@ -141,6 +141,7 @@ void init_cache(int total_size_width, int associativity_width) {
   group_num = 1 << (group_width); //cache总组数
   line_num = 1 << (total_size_width - 6); //cache总行数
   every_group_line = line_num / group_num; //cache每组的行数 “几路总相联”
+  
   //init
   cache = (cache_line *)malloc(sizeof(cache_line)*line_num);
   for(int i=0; i<line_num; i++)
