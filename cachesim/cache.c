@@ -8,6 +8,7 @@ static uint64_t cycle_cnt = 0;
 
 void cycle_increase(int n) { cycle_cnt += n; }
 
+//定义结构体表示cache行
 typedef struct
 {
   int valid;//有效位
@@ -23,8 +24,8 @@ uint64_t line_num,group_num;
 //随机替换
 int random_replacement(int group_no)
 {
-  int random_num = rand() % every_group_line;
-  int replace_no = group_no*every_group_line + random_num;
+  int random_num = rand();
+  int replace_no = group_no*every_group_line + (random_num  % every_group_line);
   //write back
   if(cache[replace_no].dirty_bit == 1)
   {
