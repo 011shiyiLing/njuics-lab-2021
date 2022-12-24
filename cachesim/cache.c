@@ -27,7 +27,7 @@ int random_replacement(int group_no)
 {
   srand((unsigned)time(NULL));//随机数种子
   int random_num = rand();
-  int replace_no = group_no*every_group_line + (random_num  % every_group_line);
+  int replace_no = group_no*every_group_line + (random_num % every_group_line);
 
   //write back(只有当cache行中的主存快被替换时，才将该主存快内容一次性写回主存)
   if(cache[replace_no].dirty_bit == 1)
@@ -141,7 +141,7 @@ void init_cache(int total_size_width, int associativity_width) {
   group_num = 1 << (group_width); //cache总组数
   line_num = 1 << (total_size_width - 6); //cache总行数
   every_group_line = line_num / group_num; //cache每组的行数 “几路总相联”
-  
+
   //init
   cache = (cache_line *)malloc(sizeof(cache_line)*line_num);
   for(int i=0; i<line_num; i++)
