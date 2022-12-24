@@ -42,7 +42,7 @@ int random_replacement(int group_no)
 // 若缺失，需要先从内存中读入数据
 uint32_t cache_read(uintptr_t addr) {
   int tag = addr >> (group_width + 6);
-  int group_no = (addr >> 6) & (group_num -1); //主存对应的cache组号
+  int group_no = (addr >> 6) & (~group_num); //主存对应的cache组号
   int group_addr = (addr&0x3f) >> 2;//
 
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
