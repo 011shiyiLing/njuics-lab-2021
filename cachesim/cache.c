@@ -144,6 +144,11 @@ void init_cache(int total_size_width, int associativity_width) {
     cache[i].valid = 0;
     cache[i].dirty_bit = 0;
     cache[i].tag = 0;
+    
+    for(int j=0; j<BLOCK_SIZE; j++)
+    {
+      cache[i].data[j] = NULL;
+    }
   }
 }
 
