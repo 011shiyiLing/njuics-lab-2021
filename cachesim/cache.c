@@ -110,10 +110,11 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
     if(cache[i].valid == 0)
     {
       mem_read(block_num,(uint8_t *)cache[i].data);
-      cache[i].tag = tag;
       //write
       cache[i].data[group_addr] = (cache[i].data[group_addr] & (~wmask)) | (data & wmask);
+      cache[i].tag = tag;
       cache[i].valid = 1;
+      cache[i].dirty_bit = 1;
       return;
     }
   }
@@ -123,7 +124,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   mem_read(block_num,(uint8_t *)cache[replacement_no].data);
   //write
   cache[replacement_no].tag = tag;
-  //cache[replacement_no].dirty_bit = 1;
+  cache[replacement_no].dirty_bit = 1;
   cache[replacement_no].valid = 1;
   cache[replacement_no].data[group_addr] = (cache[replacement_no].data[group_addr] & (~wmask)) | (data & wmask);
   return;
