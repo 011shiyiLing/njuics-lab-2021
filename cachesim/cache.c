@@ -8,16 +8,125 @@ static uint64_t cycle_cnt = 0;
 
 void cycle_increase(int n) { cycle_cnt += n; }
 
+typedef struct
+{
+  int valid;//有效位
+  int tag;//标记
+  uint32_t data[BLOCK_SIZE];//数据
+  int dirty_bit;//脏位
+}cache_line;
+
+static cache_line *cache;
+int group_width,every_group_line;
+uint64_t line_num,group_num;
+
+//随机替换
+int random_replacement(int group_no)
+{
+  int random_num = rand() % every_group_line;
+  int replace_no = group_no*every_group_line + random_num;
+  //write back
+  if(cache[replace_no].dirty_bit == 1)
+  {
+    uintptr_t block_num = (cache[replace_no].tag << group_width) + group_no;
+    cache[replace_no].valid = 0;
+    mem_write(block_num,(uint8_t *)cache[replace_no].data);
+    cache[replace_no].dirty_bit = 0; 
+  }
+  return replace_no;
+}
+
 // TODO: implement the following functions
 
+// 从 cache 中读出 addr 地址处的 4 字节数据
+// 若缺失，需要先从内存中读入数据
 uint32_t cache_read(uintptr_t addr) {
-  return 0;
+  int tag = addr >> (group_width + 6);
+  int group_no = (addr >> 6) & (group_num -1); //主存对应的cache组号
+  int group_addr = (addr&0x3f) >> 2;//
+
+  for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
+  {
+    if((cache[i].tag == tag) & (cache[i].valid) == 1)
+    {
+      return cache[i].data[group_addr];
+    }
+  }
+
+  //缺失,从内存中读入数据
+  uintptr_t block_num = addr >> 6;//主存块号
+  for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
+  {
+    if(cache[i].valid == 0)
+    {
+      mem_read(block_num,(uint8_t *)cache[i].data);
+      cache[i].valid = 1;
+      cache[i].tag = tag;
+      return cache[i].data[group_addr];
+    }
+  }
+
+  //满了，采取随机替换
+  int replacement_no = random_replacement(group_no);
+  mem_read(block_num,(uint8_t *)cache[replacement_no].data);
+  cache[replacement_no].valid = 1;
+  cache[replacement_no].tag = tag;
+  return cache[replacement_no].data[group_addr];
 }
 
+// 往 cache 中 addr 地址所属的块写入数据 data，写掩码为 wmask/ ((1 << 6) * (1 << associativity_width))
+// 例如当 wmask 为 0xff 时，只写入低8比特
+// 若缺失，需要从先内存中读入数据
 void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
+  int tag = addr >> (group_width + 6);
+  int group_no = (addr >> 6) & (group_num -1); //主存对应的cache组号
+  int group_addr = (addr&0x3f) >> 2;//
+
+  for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
+  {
+    if(cache[i].tag == tag)
+    {
+      cache[i].data[group_addr] = data | (~wmask);
+      cache[i].dirty_bit = 1;
+      cache[i].valid = 1;
+    }
+  }
+
+  //缺失,从内存中读入数据
+  uintptr_t block_num = addr >> 6;//主存块号
+  for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
+  {
+    if(cache[i].valid == 0)
+    {
+      mem_read(block_num,(uint8_t *)cache[i].data);
+      cache[i].valid = 1;
+      cache[i].tag = tag;
+    }
+  }
+
+  //满了，采取随机替换
+  int replacement_no = random_replacement(group_no);
+  mem_read(block_num,(uint8_t *)cache[replacement_no].data);
+  cache[replacement_no].valid = 1;
+  cache[replacement_no].tag = tag;
+
 }
 
+// 初始化一个数据大小为 2^total_size_width B，关联度为 2^associativity_width 的 cache
+// 例如 init_cache(14, 2) 将初始化一个 16KB，4 路组相联的cache
+// 将所有 valid bit 置为无效即可
 void init_cache(int total_size_width, int associativity_width) {
+  group_width = total_size_width - 6 - associativity_width;
+  group_num = 1 << (group_width);
+  line_num = 1 << (total_size_width - 6);
+  every_group_line = 1 << (associativity_width);
+  cache = (cache_line *)malloc(sizeof(cache_line)*line_num);
+
+  for(int i=0; i<line_num; i++)
+  {
+    cache[i].valid = 0;
+    cache[i].dirty_bit = 0;
+  }
 }
 
 void display_statistic(void) {
