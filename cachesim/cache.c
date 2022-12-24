@@ -47,7 +47,7 @@ uint32_t cache_read(uintptr_t addr) {
 
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
-    if((cache[i].tag == tag) & (cache[i].valid) == 1)
+    if(((cache[i].tag == tag) & (cache[i].valid)))
     {
       return cache[i].data[group_addr];
     }
