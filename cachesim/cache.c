@@ -114,7 +114,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
       cache[i].data[group_addr] = (cache[i].data[group_addr] & (~wmask)) | (data & wmask);
       cache[i].tag = tag;
       cache[i].valid = 1;
-      cache[i].dirty_bit = 1;
+      //cache[i].dirty_bit = 1;
       return;
     }
   }
