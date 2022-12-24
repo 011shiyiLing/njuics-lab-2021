@@ -32,7 +32,7 @@ int random_replacement(int group_no)
   {
     uintptr_t block_num = (cache[replace_no].tag << group_width) + group_no;
     mem_write(block_num,(uint8_t *)cache[replace_no].data);
-    
+    //clear
     for(int j=0; j<BLOCK_SIZE; j++)
     {
       cache[replace_no].data[j] = 0;
@@ -109,7 +109,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   {
     if(cache[i].valid == 0)
     {
-      mem_read(block_num,(uint8_t *)cache[i].data);
+     // mem_read(block_num,(uint8_t *)cache[i].data);
       cache[i].tag = tag;
       //write
       cache[i].data[group_addr] = (cache[i].data[group_addr] & (~wmask)) | (data & wmask);
