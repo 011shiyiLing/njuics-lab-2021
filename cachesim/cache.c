@@ -147,7 +147,7 @@ void init_cache(int total_size_width, int associativity_width) {
     
     for(int j=0; j<BLOCK_SIZE; j++)
     {
-      cache[i].data[j] = NULL;
+      cache[i].data[j] = 0;
     }
   }
 }
