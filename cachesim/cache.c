@@ -44,7 +44,7 @@ int random_replacement(int group_no)
 uint32_t cache_read(uintptr_t addr) {
   int tag = addr >> (group_width + 6);
   int group_no = (addr >> 6) & (mask_with_len(group_width)); //主存对应的cache组号
-  int group_addr = (addr & mask_with_len(6)) & (~0x3);//组内地址
+  int group_addr = (addr&0x3f) >> 2;//组内地址
 
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
@@ -86,12 +86,11 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
-    if(cache[i].tag == tag)
+    if(((cache[i].tag == tag) & (cache[i].valid)))
     {
       cache[i].data[group_addr] &= (~wmask);
       cache[i].data[group_addr] |= (data & wmask);
       cache[i].dirty_bit = 1;
-      cache[i].valid = 1;
       return;
     }
   }
