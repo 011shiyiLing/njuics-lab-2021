@@ -63,12 +63,12 @@ uint32_t cache_read(uintptr_t addr) {
   }
 
   //缺失,从内存中读入数据
-  uintptr_t block_num = addr >> 6;//主存块号
+  int block_num = addr >> 6;//主存块号
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
     if(cache[i].valid == 0)
     {
-      mem_read(block_num,(uint8_t *)cache[i].data);
+      mem_read((uintptr_t)block_num,(uint8_t *)cache[i].data);
       cache[i].valid = 1;
       cache[i].tag = tag;
       cache[i].dirty_bit = 1;
@@ -78,7 +78,7 @@ uint32_t cache_read(uintptr_t addr) {
 
   //满了，采取随机替换
   int replacement_no = random_replacement(group_no);
-  mem_read(block_num,(uint8_t *)cache[replacement_no].data);
+  mem_read((uintptr_t)block_num,(uint8_t *)cache[replacement_no].data);
   cache[replacement_no].valid = 1;
   cache[replacement_no].tag = tag;
   cache[replacement_no].dirty_bit = 1;
