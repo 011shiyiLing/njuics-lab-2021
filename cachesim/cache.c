@@ -105,7 +105,6 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
   //缺失,从内存中读入数据
   int block_num = addr >> 6;//主存块号
-  int new_line;
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
     if(cache[i].valid == 0)
