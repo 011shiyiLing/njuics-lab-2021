@@ -105,13 +105,13 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   }
 
   //缺失,从内存中读入数据
-  uintptr_t block_num = addr >> 6;//主存块号
+  int block_num = addr >> 6;//主存块号
   int new_line;
   for(int i= group_no*every_group_line; i < (group_no+1)*every_group_line; i++)
   {
     if(cache[i].valid == 0)
     {
-      mem_read(block_num,(uint8_t *)cache[i].data);
+      mem_read((uintptr_t)block_num,(uint8_t *)cache[i].data);
       //write
       cache[i].data[group_addr] = (cache[i].data[group_addr] & (~wmask)) | (data & wmask);
       cache[i].tag = tag;
