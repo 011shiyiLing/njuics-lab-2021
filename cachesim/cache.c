@@ -14,7 +14,7 @@ typedef struct
 {
   int valid;//有效位
   int tag;//标记
-  uint32_t data[BLOCK_SIZE];//数据
+  uint8_t data[BLOCK_SIZE];//数据
   int dirty_bit;//脏位
 }cache_line;
 
