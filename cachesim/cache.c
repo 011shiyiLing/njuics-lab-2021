@@ -111,7 +111,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
   {
     if(cache[i].valid == 0)
     {
-      mem_read((uintptr_t)block_num,(uint8_t *)cache[i].data);
+      //mem_read((uintptr_t)block_num,(uint8_t *)cache[i].data);
       //write
       cache[i].data[group_addr] = (cache[i].data[group_addr] & (~wmask)) | (data & wmask);
       cache[i].tag = tag;
@@ -123,7 +123,7 @@ void cache_write(uintptr_t addr, uint32_t data, uint32_t wmask) {
 
   //满了，采取随机替换
   int replacement_no = random_replacement(group_no);
-  mem_read(block_num,(uint8_t *)cache[replacement_no].data);
+  mem_read((uintptr_t)block_num,(uint8_t *)cache[replacement_no].data);
   //write
   cache[replacement_no].data[group_addr] = (cache[replacement_no].data[group_addr] & (~wmask)) | (data & wmask);
   cache[replacement_no].tag = tag;
