@@ -19,8 +19,7 @@ typedef struct
 }cache_line;
 
 static cache_line *cache;
-static int group_width,every_group_line;
-static uint64_t line_num,group_num;
+static int group_width,every_group_line,line_num,group_num;
 
 //随机替换
 int random_replacement(int group_no)
