@@ -14,7 +14,7 @@ typedef struct
 {
   int valid;//有效位
   int tag;//标记
-  uint32_t data[BLOCK_SIZE];//数据
+  uint8_t data[BLOCK_SIZE];//数据
   int dirty_bit;//脏位
 }cache_line;
 
@@ -58,7 +58,7 @@ uint32_t cache_read(uintptr_t addr) {
   {
     if(((cache[i].tag == tag) & (cache[i].valid)))
     {
-      return cache[i].data[group_addr];
+      return (uint32_t)cache[i].data[group_addr];
     }
   }
 
@@ -72,7 +72,7 @@ uint32_t cache_read(uintptr_t addr) {
       cache[i].valid = 1;
       cache[i].tag = tag;
       cache[i].dirty_bit = 1;
-      return cache[i].data[group_addr];
+      return (uint32_t)cache[i].data[group_addr];
     }
   }
 
@@ -82,7 +82,7 @@ uint32_t cache_read(uintptr_t addr) {
   cache[replacement_no].valid = 1;
   cache[replacement_no].tag = tag;
   cache[replacement_no].dirty_bit = 1;
-  return cache[replacement_no].data[group_addr];
+  return (uint32_t)cache[replacement_no].data[group_addr];
 }
 
 // 往 cache 中 addr 地址所属的块写入数据 data，写掩码为 wmask/ ((1 << 6) * (1 << associativity_width))
